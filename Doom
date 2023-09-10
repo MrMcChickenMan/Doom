@@ -1,0 +1,46 @@
+import pygame
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Constants
+WIDTH, HEIGHT = 800, 600
+PLAYER_SIZE = 40
+PLAYER_SPEED = 5
+WHITE = (255, 255, 255)
+
+# Create the screen
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Doom-Style Game")
+
+# Player setup
+player = pygame.Rect(WIDTH // 2, HEIGHT // 2, PLAYER_SIZE, PLAYER_SIZE)
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # Player movement
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        player.x -= PLAYER_SPEED
+    if keys[pygame.K_RIGHT]:
+        player.x += PLAYER_SPEED
+    if keys[pygame.K_UP]:
+        player.y -= PLAYER_SPEED
+    if keys[pygame.K_DOWN]:
+        player.y += PLAYER_SPEED
+
+    # Draw everything
+    screen.fill((0, 0, 0))
+    pygame.draw.rect(screen, WHITE, player)
+
+    # Update the display
+    pygame.display.flip()
+
+# Quit the game
+pygame.quit()
